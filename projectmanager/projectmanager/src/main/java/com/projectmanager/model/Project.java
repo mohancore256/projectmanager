@@ -22,15 +22,26 @@ public class Project {
 	private String projectName;
 	
 	@Column(name="START_DATE")
-	@JsonFormat (pattern = "MM-dd-yyy")
+	@JsonFormat (pattern = "yyyy-MM-dd")
 	private Date startDate;
 	
 	@Column(name="END_DATE")
-	@JsonFormat(pattern = "MM-dd-yyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 	
 	@Column(name="PRIORITY")
 	private Integer Priority;
+
+	private String status;
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Long getProjectId() {
 		return ProjectId;
@@ -77,8 +88,9 @@ public class Project {
 	@Override
 	public String toString() {
 		return "Project [ProjectId=" + ProjectId + ", projectName=" + projectName + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", Priority=" + Priority + "]";
+				+ ", endDate=" + endDate + ", Priority=" + Priority + ", status=" + status + "]";
 	}
+
 	
 	
 	

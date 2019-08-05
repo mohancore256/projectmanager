@@ -1,5 +1,6 @@
 package com.projectmanager.controller;
 
+import java.lang.management.MemoryType;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projectmanager.model.Project;
+import com.projectmanager.model.Task;
 import com.projectmanager.model.User;
 import com.projectmanager.repository.ProjectRepository;
 import com.projectmanager.service.ProjectService;
+import com.projectmanager.service.TaskService;
 import com.projectmanager.service.UserService;
 
 @RestController
@@ -34,6 +37,9 @@ public class ProjectManagerController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private TaskService taskService;
 	
 	@RequestMapping(path="projectManager/user/save",method=RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody User user){
@@ -95,6 +101,7 @@ public class ProjectManagerController {
 	
 	@RequestMapping( value="projectManager/project/delete", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deleteProject(@PathParam("projectId") Long projectId){
+		logger.info("deleting a project");
 		Project projectResponse = projectService.getProjectById(projectId);
 		if( null != projectResponse ) {
 			 projectService.deleteProjectById(projectId);
@@ -106,6 +113,7 @@ public class ProjectManagerController {
 	
 	@RequestMapping(value="/projectManager/project/getAll", method=RequestMethod.GET)
 	public ResponseEntity<?> getAllProject(){
+		logger.info("Getting All project");
 		List<Project> projectList = projectService.getAll();
 		if(null != projectList) {
 			return ResponseEntity.ok(projectList);
@@ -116,6 +124,7 @@ public class ProjectManagerController {
 	
 	@RequestMapping(value="/projectManager/project/update", method=RequestMethod.POST)
 	public ResponseEntity<?> updateProject(@RequestBody Project project){
+		logger.info("updating a project");
 		Project projectResponse = projectService.saveProject(project);
 		if(null != projectResponse) {
 			return ResponseEntity.ok(projectResponse);
@@ -124,6 +133,51 @@ public class ProjectManagerController {
 		}
 	}
 	
+	
+	@RequestMapping( value="/projectManager/task/save", method=RequestMethod.POST)
+	public ResponseEntity<?> saveTask(@RequestBody Task task){ 
+		logger.info("Adding new Task");
+		Task taskResponse = taskService.addTask(task);
+		if(null != taskResponse) {
+			return ResponseEntity.ok(taskResponse);
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(taskResponse);
+		 }
+	}
+	
+	@RequestMapping( value="/projectManager/task/delete", method=RequestMethod.DELETE)
+	public ResponseEntity<?> deleteTask(@PathParam("taskId") Long taskId){
+		logger.info("Deleteing a Task");
+	    Task taskResponse = taskService.getTask(taskId);
+	    if( null != taskResponse) {
+	    	taskService.deleteTaskByTaskId(taskId);
+	    	return ResponseEntity.ok(taskResponse);
+	    }else {
+	    	return ResponseEntity.ok(HttpStatus.NOT_ACCEPTABLE);
+	    }
+	   }
+	
+	@RequestMapping(value="/projectManager/task/getAll", method=RequestMethod.GET)
+	public ResponseEntity<?> getAllTask(){
+		logger.info("getting all task");
+		List<Project> projectList = projectService.getAll();
+		if(null != projectList) {
+			return ResponseEntity.ok(projectList);
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(projectList);
+		}
+	}
+	
+	@RequestMapping(value="projectManager/task/update", method=RequestMethod.POST)
+ 	public ResponseEntity<?> updateTask(@RequestBody Task task){ 
+		logger.info("updating a project");
+		Task taskResponse= taskService.addTask(task);
+		if(null != taskResponse) {
+			return ResponseEntity.ok(taskResponse);
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(taskResponse);
+		}
+	 }
 	
 	
 
