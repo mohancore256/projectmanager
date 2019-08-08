@@ -5,24 +5,52 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="USER_ID")
+	@Column(name = "USER_ID")
 	private Long userId;
-	
-	@Column(name="FIRST_NAME")
+
+	@Column(name = "FIRST_NAME")
 	private String firstName;
 
-	@Column(name="LAST_NAME")
+	@Column(name = "LAST_NAME")
 	private String lastName;
-	
-	@Column(name="EMPLOYEE_ID")
+
+	@Column(name = "EMPLOYEE_ID")
 	private String employeeId;
+
+	@ManyToOne
+	@JoinColumn(name = "PROJECT_ID",nullable=true)
+	@JsonIgnore
+	private Project project;	
+
+	@ManyToOne
+	@JoinColumn(name = "TASK_ID",nullable=true)
+	@JsonIgnore
+	private Task task;
+
+	public Task getTask() {
+		return task;
+	}
+
+	public void setTask(Task task) {
+		this.task = task;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 	public Long getUserId() {
 		return userId;
@@ -60,6 +88,21 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", employeeId="
 				+ employeeId + "]";
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(Long userId, String firstName, String lastName, String employeeId, Project project, Task task) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.employeeId = employeeId;
+		this.project = project;
+		this.task = task;
 	}
 	
 	

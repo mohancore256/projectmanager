@@ -1,41 +1,101 @@
 package com.projectmanager.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Task {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column( name="TASK_ID")
+	@Column(name = "TASK_ID")
 	private Long taskId;
-	
-	@Column( name="PARENT_ID")
-	private Long parentId;
-	
-	@Column( name="PROJECT_ID")
-	private Long projectId;
-	
-	@Column( name="TASK")
-	private String task;
-	
-	@Column( name="START_DATE")
+
+	/*
+	 * @Column(name = "PARENT_ID") private Long parentId;
+	 */
+
+
+	@Column(name = "START_DATE")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
-	
-	@Column( name="END_DATE")
+
+	@Column(name = "END_DATE")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
-	
-	@Column( name="PRIORITY")
+
+	@Column(name = "PRIORITY")
 	private Integer priority;
+
+	@Column(name = "STATUS")
+	private String status;
 	
-	@Column( name="STATUS")
-	private Boolean status;
+	@Column(name ="TASK_NAME")
+	private String taskName;
+
+	@OneToMany(mappedBy="task",cascade = CascadeType.ALL)	
+	private Set<User> users;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "PROJECT_ID")
+	//@JsonIgnore	
+	private Project project;
+	
+	@ManyToOne
+	@JoinColumn(name = "PARENT_TASK_ID",nullable=true)
+	//@JsonIgnore
+	private ParentTask parentTask;
+
+	
+    
+	public ParentTask getParentTask() {
+		return parentTask;
+	}
+
+	public void setParentTask(ParentTask parentTask) {
+		this.parentTask = parentTask;
+	}
+
+	public String getTaskName() {
+		return taskName;
+	}
+
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
+
+
 
 	public Long getTaskId() {
 		return taskId;
@@ -45,29 +105,7 @@ public class Task {
 		this.taskId = taskId;
 	}
 
-	public Long getParentId() {
-		return parentId;
-	}
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public Long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
-	}
-
-	public String getTask() {
-		return task;
-	}
-
-	public void setTask(String task) {
-		this.task = task;
-	}
 
 	public Date getStartDate() {
 		return startDate;
@@ -93,22 +131,25 @@ public class Task {
 		this.priority = priority;
 	}
 
-	public Boolean getStatus() {
+
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "Task [taskId=" + taskId + ", parentId=" + parentId + ", projectId=" + projectId + ", task=" + task
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", priority=" + priority + ", status=" + status
-				+ "]";
+		return "Task [taskId=" + taskId + ", startDate=" + startDate + ", endDate=" + endDate + ", priority=" + priority
+				+ ", status=" + status + ", taskName=" + taskName + ", users=" + users + ", project=" + project
+				+ ", parentTask=" + parentTask + "]";
 	}
-	
-	
+
+
+
 	
 
 }

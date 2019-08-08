@@ -26,7 +26,12 @@ export class TaskService {
   }
 
   getAllTask():Observable<any>{
-    return this.http.get(this.myAppUrl+"getAll");
+    return this.http.get(this.myAppUrl+"/getAll");
   }
+
+  // getSortedTask():Observable<any>{
+  //   const params = new HttpParams().set("columnName", task.startDate as unknown as string)
+  //   return this.http.get(this.myAppUrl+"sort")
+  // }
 
 }

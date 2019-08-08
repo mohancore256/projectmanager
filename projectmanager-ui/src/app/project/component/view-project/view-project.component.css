@@ -12,6 +12,32 @@ hr {
   text-align: center;
 }
 
-/* .endDate{
-  text-align: center;
-} */
+button[type=submit] {
+  width: 60%;
+  background-color: rgb(151, 111, 170);
+  color: white;
+  padding: 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  background-color: rgb(143, 84, 170);;
+}
+
+
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}

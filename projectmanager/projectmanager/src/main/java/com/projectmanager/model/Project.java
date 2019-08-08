@@ -1,40 +1,66 @@
 package com.projectmanager.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Project {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="PROJECT_ID")
+	@Column(name = "PROJECT_ID")
 	private Long ProjectId;
-	
-	@Column(name="PROJECT_NAME")
+
+	@Column(name = "PROJECT_NAME")
 	private String projectName;
-	
-	@Column(name="START_DATE")
-	@JsonFormat (pattern = "yyyy-MM-dd")
+
+	@Column(name = "START_DATE")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
-	
-	@Column(name="END_DATE")
+
+	@Column(name = "END_DATE")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
-	
-	@Column(name="PRIORITY")
+
+	@Column(name = "PRIORITY")
 	private Integer Priority;
 
+	@OneToMany(mappedBy="project",cascade = CascadeType.ALL)	
+	private Set<User> users;
+
+	@OneToMany(mappedBy="project",cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Set<Task> tasks;
+
+	public Set<Task> getTasks() {	
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 	private String status;
-	
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -75,8 +101,6 @@ public class Project {
 		this.endDate = endDate;
 	}
 
-
-
 	public Integer getPriority() {
 		return Priority;
 	}
@@ -91,8 +115,23 @@ public class Project {
 				+ ", endDate=" + endDate + ", Priority=" + Priority + ", status=" + status + "]";
 	}
 
-	
-	
-	
+	public Project(Long projectId, String projectName, Date startDate, Date endDate, Integer priority, Set<User> users,
+			Set<Task> tasks, String status) {
+		super();
+		ProjectId = projectId;
+		this.projectName = projectName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		Priority = priority;
+		this.users = users;
+		this.tasks = tasks;
+		this.status = status;
+	}
 
+	public Project() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
 }

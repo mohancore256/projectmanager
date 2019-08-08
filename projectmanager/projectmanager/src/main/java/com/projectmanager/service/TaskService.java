@@ -10,6 +10,8 @@ import com.projectmanager.repository.TaskRepository;
 
 @Service
 public class TaskService {
+	
+
 
 	@Autowired
 	private TaskRepository taskRepository;
@@ -31,6 +33,15 @@ public class TaskService {
 	}
 	
 	public List<Task> getAllTask(){
+		return taskRepository.findAll();
+	}
+	
+	public List<Task> sortTask(String columnName){
+		if(columnName == "START_DATE") {
+			return taskRepository.sortingTaskByStartDate();
+		}else if(columnName == "END_DATE") {
+			return taskRepository.sortingTaskByEndDate();
+		}
 		return taskRepository.findAll();
 	}
 }

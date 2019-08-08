@@ -1,3 +1,7 @@
+import { Project } from 'src/app/project/model/project';
+import { User } from 'src/app/user/model/user';
+import { ParentTask } from './parent-task';
+
 export class Task {
 
     taskId : number;
@@ -13,5 +17,9 @@ export class Task {
     endDate : Date;
 
     priority :number;
+    status:string;
+    users:User[];
+    project:Project;
+    parentTask:ParentTask;
 
 }

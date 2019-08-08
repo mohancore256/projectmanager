@@ -15,6 +15,9 @@ import { AddTaskComponent } from './task/component/add-task/add-task.component';
 import { FilterPipe } from './filter.pipe';
 import { ViewTaskComponent } from './task/component/view-task/view-task.component';
 import { TaskDetailComponent } from './task/component/task-detail/task-detail.component';
+import { SearchDropBoxComponent } from './common/generic/search-drop-box/search-drop-box.component';
+import { SearchDropBoxProjectComponent } from './common/generic/search-drop-box-project/search-drop-box-project.component';
+import { SearchDropBoxTaskComponent } from './common/generic/search-drop-box-task/search-drop-box-task.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { TaskDetailComponent } from './task/component/task-detail/task-detail.co
     AddTaskComponent,
     FilterPipe,
     ViewTaskComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    SearchDropBoxComponent,
+    SearchDropBoxProjectComponent,
+    SearchDropBoxTaskComponent
   ],
   imports: [
     BrowserModule,

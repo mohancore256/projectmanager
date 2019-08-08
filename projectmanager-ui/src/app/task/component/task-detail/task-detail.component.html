@@ -4,47 +4,54 @@
     <div class="col-md-2">
       <div class="row">
         <div class="row"><div class="col-md-12"><label>Task :</label></div></div>
-        <div class="row"><div class="col-md-12"><input type="text"></div></div>
+        <div class="row"><div class="col-md-12"><input type="text"  [(ngModel)]="taskDetials.taskName"></div></div>
       </div>
     </div>
 
     <div class="col-md-2">
         <div class="row">
           <div class="row"><div class="col-md-12"><label>Project :</label></div></div>
-          <div class="row"><div class="col-md-12"><input type="text"></div></div>
+          <div class="row"><div class="col-md-12"><input type="text"  [(ngModel)]="taskDetials.project.projectName" readonly="true"></div></div>
         </div>
     </div>
 
     <div class="col-md-2">
         <div class="row">
           <div class="row"><div class="col-md-12"><label>Priority :</label></div></div>
-          <div class="row"><div class="col-md-12"><input type="text"></div></div>
+          <div class="row"><div class="col-md-12"><input type="text" [(ngModel)]="taskDetials.priority"></div></div>
         </div>
     </div>
 
     <div class="col-md-2">
+      <div class="row">
+        <div class="row"><div class="col-md-12"><label>Status :</label></div></div>
+        <div class="row"><div class="col-md-12"><input type="text" [(ngModel)]="taskDetials.status" readonly="true"></div></div>
+      </div>
+   </div>
+
+    <div class="col-md-2">
         <div class="row">
           <div class="row"><div class="col-md-12"><label>Start Date :</label></div></div>
-          <div class="row"><div class="col-md-12"><input type="date"></div></div>
+          <div class="row"><div class="col-md-12"><input type="date"  [(ngModel)]="taskDetials.startDate"></div></div>
         </div>
     </div>
 
     <div class="col-md-2">
           <div class="row">
             <div class="row"><div class="col-md-12"><label>End Date :</label></div></div>
-            <div class="row"><div class="col-md-12"><input type="date"></div></div>
+            <div class="row"><div class="col-md-12"><input type="date"  [(ngModel)]="taskDetials.endDate"></div></div>
           </div>
     </div>
 
     <div class="col-md-1">
       <div class="row">
-        <button>Edit</button>
+        <button type="submit" (click)="updatingTask()">Edit</button>
       </div>
     </div>
 
     <div class="col-md-1">
         <div class="row">
-          <button>End Task</button>
+          <button type="submit" (click)="completeTask()">End Task</button>
         </div>
      </div>
 

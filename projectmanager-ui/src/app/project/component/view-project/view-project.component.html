@@ -55,14 +55,14 @@
          <div class="col-md-12"><label>Priority :</label></div>
        </div>
        <div class="row">
-         <div class="col-md-12"><input  [(ngModel)] ="projectDetails.priority" type="text"></div>
+         <div class="col-md-8"><input  [(ngModel)] ="projectDetails.priority" type="text"></div>
        </div>
      </div>
 
 <!--Update and suspend button-->
      <div class="col-md-2">
-       <div class="row"><div class="col-md-12"><button (click)="editProject()" >Update</button></div></div>
-       <div class="row"><div class="col-md-12"><button (click)="suspendProject()" >Suspend</button></div></div>
+       <div class="row"><div class="col-md-12"><button type="submit" (click)="editProject()" >Update</button></div></div>
+       <div class="row"><div class="col-md-12"><button type="submit" (click)="suspendProject()" >Suspend</button></div></div>
      </div>
 
      <hr> 

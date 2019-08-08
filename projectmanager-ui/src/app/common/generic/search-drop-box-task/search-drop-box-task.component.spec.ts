@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserComponent } from './add-user.component';
+import { SearchDropBoxTaskComponent } from './search-drop-box-task.component';
 
-describe('AddUserComponent', () => {
-  let component: AddUserComponent;
-  let fixture: ComponentFixture<AddUserComponent>;
+describe('SearchDropBoxTaskComponent', () => {
+  let component: SearchDropBoxTaskComponent;
+  let fixture: ComponentFixture<SearchDropBoxTaskComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddUserComponent ]
+      declarations: [ SearchDropBoxTaskComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUserComponent);
+    fixture = TestBed.createComponent(SearchDropBoxTaskComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
